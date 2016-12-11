@@ -1,4 +1,4 @@
-function [net] = sample_refNet_initial(varargin)
+function [net] = refNet_init(varargin)
 % sample code for initializing the refNet1 for mini-places challenge
 % adapted from matconvnet-1.0-beta14/matconvnet-1.0-beta14/examples/cnn_imagenet_init.m
 
