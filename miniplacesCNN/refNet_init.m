@@ -28,7 +28,7 @@ net.layers{end+1} = struct('type', 'softmaxloss', 'name', 'loss') ;
 
 net.normalization.border = 128 - net.normalization.imageSize(1:2) ;
 net.normalization.interpolation = 'bicubic' ;
-net.normalization.averageImage = [] ;
+net.normalization.averageImage = [117.3655; 112.6715; 104.7922] ;
 net.normalization.keepAspect = true ;
  
 

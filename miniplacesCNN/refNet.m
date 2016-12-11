@@ -16,7 +16,7 @@ opts.learningRate = 0.0001 ;
 % opts.numEpochs is the number of epochs. If you experiment with more
 % complex networks you might need to increase this. Likewise if you add
 % regularization that slows training.
-opts.numEpochs = 20 ;
+opts.numEpochs = 5 ;
 
 % An example of learning rate decay as an alternative to the fixed learning
 % rate used by default. This isn't necessary but can lead to better
@@ -49,13 +49,13 @@ net = refNet_init();
 % with each run. I found it fast enough to rebuild and less likely to cause
 % errors when you change the way images are preprocessed.
 
-% imdb_filename = 'imdb.mat';
-% if exist(imdb_filename, 'file')
-%   imdb = load(imdb_filename) ;
-% else
+imdb_filename = 'imdb.mat';
+if exist(imdb_filename, 'file')
+  imdb = load(imdb_filename) ;
+else
   imdb = refNet_setup_data();
-%   save(imdb_filename, '-struct', 'imdb') ;
-% end
+  save(imdb_filename, '-struct', 'imdb') ;
+end
 
 
 

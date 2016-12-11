@@ -11,7 +11,8 @@ data_selection = 'val'; % val or test
 
 % load pre-trained model
 load('categoryIDX.mat');
-path_model = 'refNet1-epoch-60.mat';
+% path_model = 'refNet1-epoch-60.mat';
+path_model = 'data/refNet1/net-epoch-5.mat';
 load([path_model]) ;
 % net = cnn_imagenet_init();
 
@@ -30,7 +31,7 @@ files = dir(strcat('../final_project_data/images/',data_selection,'/*.jpg'));
 
 index = 1;
 for file = files'
-    if index <= 10
+    if index <= 100
         current_image = strcat(data_selection,'/',file.name);
         im = imread(strcat(image_path, current_image)) ;
         im_resize = imresize(im, net_norm.imageSize(1:2)) ;

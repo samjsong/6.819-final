@@ -5,7 +5,7 @@
 fprintf('MINI PLACES SCENE CLASSIFICATION CHALLENGE\n');
 
 pred_file='results_val.txt';
-ground_truth_file='devkit_data/val.txt';
+ground_truth_file='devkit_data/val100.txt';
 num_predictions_per_image=5;
 
 fprintf('pred_file: %s\n', pred_file);

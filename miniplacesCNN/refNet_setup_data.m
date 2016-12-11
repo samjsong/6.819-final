@@ -2,11 +2,12 @@ function imdb = refNet_setup_data()
 
 SceneJPGsPath = '../final_project_data/images/';
 
-num_train_per_category = 1000; %1000
-num_val = 10000; %10,000
+num_train_per_category = 10; %1000
+num_val = 100; %10,000
 total_images = 100*num_train_per_category + num_val; % 110,000
 
 image_size = [126 126];
+averageImage = [117.3655; 112.6715; 104.7922] ;
 
 imdb.images.data   = zeros(image_size(1), image_size(2), 3, total_images, 'single');
 imdb.images.labels = zeros(1, total_images, 'single');
@@ -46,9 +47,9 @@ for set = 1:length(sets)
                 cur_image = imresize(cur_image, image_size);
                 cur_image = single(cur_image);
                 
-%                 for i=1:3
-%                     im_(:,:,i) = im_(:,:,i)-net_norm.averageImage(i);
-%                 end
+                for j=1:3
+                    cur_image(:,:,j) = cur_image(:,:,j)-averageImage(j);
+                end
                 
                 imdb.images.data(:,:,:,image_counter) = cur_image;            
                 imdb.images.labels(1,image_counter) = category - 1;
@@ -68,6 +69,10 @@ for set = 1:length(sets)
             cur_image = imread(fullfile(cur_path, cur_images(i).name));
             cur_image = imresize(cur_image, image_size);
             cur_image = single(cur_image);
+                
+            for j=1:3
+                cur_image(:,:,j) = cur_image(:,:,j)-averageImage(j);
+            end
             
             imdb.images.data(:,:,:,image_counter) = cur_image;            
             imdb.images.labels(1,image_counter) = val_categories(i);
