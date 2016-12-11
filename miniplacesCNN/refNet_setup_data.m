@@ -2,8 +2,8 @@ function imdb = refNet_setup_data()
 
 SceneJPGsPath = '../final_project_data/images/';
 
-num_train_per_category = 100; %1000
-num_val = 1000; %10,000
+num_train_per_category = 1000; %1000
+num_val = 10000; %10,000
 total_images = 100*num_train_per_category + num_val; % 110,000
 
 image_size = [126 126];
