@@ -2,8 +2,8 @@ function imdb = refNet_setup_data()
 
 SceneJPGsPath = '../final_project_data/images/';
 
-num_train_per_category = 10; %1000
-num_val = 10; %10,000
+num_train_per_category = 100; %1000
+num_val = 1000; %10,000
 total_images = 100*num_train_per_category + num_val; % 110,000
 
 image_size = [126 126];
@@ -19,6 +19,12 @@ categories = textscan(fileID, '%s %d\n') ;
 categories = categories{1};
 fclose(fileID);
           
+fname = fullfile('devkit_data', 'val.txt') ;
+fileID = fopen(fname, 'r') ;
+val_categories = textscan(fileID, '%s %d\n');
+val_categories = val_categories{2};
+fclose(fileID);
+
 sets = {'train', 'val'};
 
 fprintf('Loading %d train and %d test images from each category\n', ...
@@ -47,6 +53,8 @@ for set = 1:length(sets)
                 imdb.images.data(:,:,:,image_counter) = cur_image;            
                 imdb.images.labels(1,image_counter) = category - 1;
                 imdb.images.set(1,image_counter) = set; %1 for train, 2 for val
+                
+                image_counter = image_counter + 1;
             end
         end
     else
@@ -62,11 +70,11 @@ for set = 1:length(sets)
             cur_image = single(cur_image);
             
             imdb.images.data(:,:,:,image_counter) = cur_image;            
-            imdb.images.labels(1,image_counter) = category; %TODO
+            imdb.images.labels(1,image_counter) = val_categories(i);
             imdb.images.set(1,image_counter) = set; %1 for train, 2 for val
+            
+            image_counter = image_counter + 1;
         end
     end
-
-    image_counter = image_counter + 1;
     
 end
