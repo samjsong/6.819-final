@@ -195,7 +195,7 @@ Figure 2 (above) shows the results of the recomposed image with color mapping, s
 %------------------------------------------------------------------------
 \section{Conclusion}
 
-We reimplemented the algorithm for neural image transfer [1] to generate images that combined the content of a photograph and the style of an artwork and also a simple method of post-processing the generated images [8] to preserve the colors of the content image while maintaining the texture of the style image. This seems to work decently, producing good results after at least 500 iterations. 
+We reimplemented the algorithm for neural image transfer [1] to generate images that combined the content of a photograph and the style of an artwork and also a simple method of post-processing the generated images [8] to preserve the colors of the content image while maintaining the texture of the style image. This seems to work decently when the content image is a photograph and the style image is a painting, producing good results after at least 500 iterations. When the inputs are switched, so that the content image is a painting and the style image is a photograph, then the results produce a distorted image, as shown in Figure 3 (above).
 
 There are many next steps that can be taken from this point. One example could be to try implementing the approaches to color mapping as discussed in [2] to achieve better results. Further steps could also be taken in respect to the work discussed under the Related Work section, such as optimizing the runtime of the neural net algorithm, extending image style transfers to video style transfers, and approaches to image style transfer that do not use neural nets.
 
