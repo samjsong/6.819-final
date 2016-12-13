@@ -195,9 +195,9 @@ Figure 2 (above) shows the results of the recomposed image with color mapping, s
 %------------------------------------------------------------------------
 \section{Conclusion}
 
-The reimplementation of the algorithms and process described in [1] was an interesting learning experience that gives us insight into the relatively new idea of image style transfer. We implemented the algorithm to generate images that combined the content of a photograph and the style of an artwork, and a simple method of postprocessing the generated images to preserve the colors of the content image while maintaining the texture of the style image.
+We reimplemented the algorithm for neural image transfer [1] to generate images that combined the content of a photograph and the style of an artwork and also a simple method of post-processing the generated images [8] to preserve the colors of the content image while maintaining the texture of the style image. This seems to work decently, producing good results after at least 500 iterations. 
 
-With more time, our team would have tried different approaches to color mapping as discussed in [2] to achieve better results. We also realize that this algorithm can be computationally expensive and therefore potentially slow. A potential next step would have been to look into optimizations in the algorithm. There are also other approaches to image style transfer that do not involve neural nets, and we could look into implementing the different methods. Another interesting potential next step would be looking into image style transfers for video, as discussed in [5].
+There are many next steps that can be taken from this point. One example could be to try implementing the approaches to color mapping as discussed in [2] to achieve better results. Further steps could also be taken in respect to the work discussed under the Related Work section, such as optimizing the runtime of the neural net algorithm, extending image style transfers to video style transfers, and approaches to image style transfer that do not use neural nets.
 
 %------------------------------------------------------------------------
 \section{Individual Contribution}
