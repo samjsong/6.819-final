@@ -92,7 +92,7 @@ Then the single convolutional neural network can generate both content represent
 \includegraphics[width=0.3\linewidth]{painted_bridge/out_500.png}
 \includegraphics[width=0.3\linewidth]{painted_bridge/out.png}
 \end{center}
-   \caption{Generated images after 100, 500 and 1000 iterations}
+   \caption{The generated images after 100, 500, and 1000 iterations. Does not preserve the color of the original image.}
 \label{fig:short}
 \end{figure*}
 
@@ -102,7 +102,7 @@ Then the single convolutional neural network can generate both content represent
 \includegraphics[width=0.3\linewidth]{painted_bridge_oc/out_500.png}
 \includegraphics[width=0.3\linewidth]{painted_bridge_oc/out.png}
 \end{center}
-   \caption{Generated images after 100, 500 and 1000 iterations, preserving the color of the original image}
+   \caption{The generated images after 100, 500, and 1000 iterations. Preserves the color of the original image.}
 \label{fig:short}
 \end{figure*}
 
@@ -169,17 +169,28 @@ The algorithm for neural image transfer produces an image that takes its color f
 %------------------------------------------------------------------------
 \section{Results}
 
-For testing our implementation we used the following photograph of the Brooklyn Bridge [9] and painting of a nighttime scene [10]: \\
-\begin{center}
+To test our implementation, we used the following photograph of the Brooklyn Bridge [9] as the content image,\begin{center}
 \includegraphics[width=0.8\linewidth]{content1.jpg}
+\end{center}
+and the following painting of a nighttime scene [10] as the style image.
+\begin{center}
 \includegraphics[width=0.8\linewidth]{style1.jpeg}
 \end{center}
 
-After trying different $\alpha$ and $\beta$ values, we chose to set $\alpha = 5$ and $\beta = 100$, as in [8], as it gave us relatively aesthetically pleasing results. When running the code without color mapping, we generated the images in figure 1. When running the code with color mapping, we generated the images in figure 2.
+After trying different $\alpha$ and $\beta$ values, we chose to set $\alpha = 5$ and $\beta = 100$, as in [8], as those parameters gave us aesthetically pleasing results. 
 
+Figure 1 (above) shows the results of the recomposed image without color mapping, so the final image has the colors from the style image. Running 100 iterations is barely enough to extract the content features of the original image, but after 500 iterations, there is a better blend of content and style features. After 1000 iterations, the content features are clear. It is interesting to note that some of the style elements may have been lost after running 1000 iterations; the portion of the sky under the Brooklyn Bridge on the left side of the recomposed image seems to have a smoothed out texture, which is a texture more like that of the photograph than the painting.
+
+Figure 2 (above) shows the results of the recomposed image with color mapping, so the final image preserves the colors from the content image. It can be seen that our implementation for color mapping could be improved, since the resulting image has the right colors but of the wrong brightness. The advantages of our implementation are that it is easy to implement and is computationally cheap, but a big disadvantage could be that it seems to work best when the content image and the style image have similar brightness levels.
+
+\begin{figure}[t]
 \begin{center}
 \includegraphics[width=0.8\linewidth]{brooklyn_night/out.png}
 \end{center}
+   \caption{The generated image after 1000 iterations, when using the photograph as the style image and the painting as the content image.}
+\label{fig:long}
+\label{fig:onecol}
+\end{figure}
 
 %------------------------------------------------------------------------
 \section{Conclusion}
