@@ -136,7 +136,11 @@ This again allows us to run back propagation to make the proper changes to the o
 
 \subsection{Style Transfer}
 
+In order to combine the two processes we describe above, we define a third loss function
+\[ L_{\text{total}}(\vec{p}, \vec{a}, \vec{x}) = \alpha L_{\text{content}}(\vec{p}, \vec{x}) + \beta L_{\text{style}} (\vec{a}, \vec{x}) \]
+that is a linear combination of the two loss functions we defined above. At each iteration of our algorithm we generate the image that minimizes the combined error between the image and both the photograph (content) and artwork (style). 
 
+\subsection{Color Mapping}
 
 %------------------------------------------------------------------------
 \section{Results}
