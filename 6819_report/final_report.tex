@@ -83,11 +83,54 @@ style representation
 %------------------------------------------------------------------------
 \section{Image Style Transfer Using Neural Networks}
 
-approach methods and implementation
-
 \subsection{Methodology}
 
 \subsection{Neural Algorithm}
+
+The algorithm we implemented performs gradient descent on an initially white noise image to learn from our content and style images, synthesizing a new image, $\vec{x}$. We use the original 19-layer VGG net to generate this combined image. In each layer $l$ with $N_l$ distinct filters, we have $N_l$ feature maps of size $M_l$. Then we can represent our feature responses in each layer $l$ as
+
+\[ F^l = \mathbb{R}^{N_l \times M_l} , \]
+where $F_{ij}^l$ is the activation of the $i$th filter at position $j$ in layer $l$, as seen in [1].
+\newline
+
+\subsubsection{Content Representation}
+
+To take the content of the photograph $\vec{p}$, we find the feature representations $P^l$ in layer $l$. Then the loss function we wish to minimize is
+
+ \[ L_{\text{content}} ( \vec{p}, \vec{x}, l ) = \frac{1}{2} \sum_{i,j} (F_{ij}^l - P_{ij}^l)^2 \]
+and the partial derivative with respect to activations is
+
+\[ \frac{ \partial L}{\partial F_{ij}^l} = \left\{
+    \begin{array}{ll}
+          (F^l - P^l)_{ij} &\text{if} \ F_{ij}^l > 0 \\
+         0 & \text{otherwise} \\
+    \end{array} 
+\right. \]
+
+After each iteration of back propagation, our algorithm will make the proper changes to the output image $\vec{x}$ that minimize the loss with respect to the features of the content image.
+
+\subsubsection{Style Representation}
+
+To take the style of the artwork $\vec{a}$, we cannot use the features as is. In order to ignore the content and only consider the texture, we use the Gram matrix $G^l \in \mathbb{R}^{N_l \times N_l}$, where
+\[ G_{ij}^l = \sum_k F_{ik}^l F_{jk}^l , \]
+as seen in [1]. We do a similar process as above. We let $A^l$ be the Gram matrix that represents the style of the artwork $\vec{a}$, and define the loss function to be
+\[ L_{\text{style}}(\vec{a}, \vec{x}) = \sum_{l = 0}^{K} w_l E_l \]
+where
+\[ E_l = \frac{1}{4N_l^2 M_l^2} \sum_{i,j} (G_{ij}^l - A_{ij}^l)^2 \]
+is the error in each layer $l$, $w_l$ is the weight we give the layer $l$'s error, and $K$ is the total number of layers. We use the same weights $w_l$ as seen in [1].
+
+The derivatives of $E_l$ are
+\[ \frac{ \partial E_l}{\partial F_{ij}^l} = \left\{
+    \begin{array}{ll}
+         \frac{1}{N_l^2 M_l^2} ((F^l)^T (G^l - A^l))_{ji} &\text{if} \ F_{ij}^l > 0 \\
+         0 & \text{otherwise} \\
+    \end{array} 
+\right. \]
+This again allows us to run back propagation to make the proper changes to the output image $\vec{x}$ that minimize the loss.
+
+\subsubsection{Style Transfer}
+
+
 
 %------------------------------------------------------------------------
 \section{Results}
