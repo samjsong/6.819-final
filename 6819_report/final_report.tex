@@ -89,7 +89,9 @@ Then the single convolutional neural network can generate both content represent
 %------------------------------------------------------------------------
 \section{Image Style Transfer Using Neural Networks}
 
-We followed the same methodology as outlined in [1]. In particular, we used the same 19-layer VGG network with 16 convolutional layers and 5 pooling layers, as given in [6], and normalized the VGG network by scaling weights. The model was publicly available in caffe [7]. We also used average pooling instead of maximum pooling, as suggested in [1]. 
+We followed the same methodology as outlined in [1]. In particular, we used the same 19-layer VGG network with 16 convolutional layers and 5 pooling layers, as given in [6], and normalized the VGG network by scaling weights. The model was publicly available in caffe [7]. We also used average pooling instead of maximum pooling, as suggested in [1].
+
+Given that we were students enrolled in 6.819 and were allowed to reference other pre-trained models for guidance, we used [8] as a resource to guide us with the code implementation.
 
 \subsection{Neural Algorithm}
 
@@ -142,6 +144,8 @@ that is a linear combination of the two loss functions we defined above. At each
 
 \subsection{Color Mapping}
 
+The algorithm for neural image transfer produces an image that takes its color from the style image, so we implemented color mapping to generate a final recomposed image that kept the colors of the content image but had the style from the style image. We considered the approaches given in [2] and decided to implement a simple version of the luminance-only transfer. In YUV image format, the Y channel contains luminance information and the UV channels hold color information. Thus, we implemented color mapping by post-processing the recomposed image [8], by taking the Y channel of the recomposed image, which had the colors of the style image, and the UV channels of the original content image to form a new recomposed image, which had the colors of the content image. 
+
 %------------------------------------------------------------------------
 \section{Results}
 
@@ -155,7 +159,9 @@ conclusion
 %------------------------------------------------------------------------
 \section{Individual Contribution}
 
-individual contribution
+I collaborated with the other team member to understand the algorithm for neural image transfer and make high-level decisions, e.g. concerning the algorithm implementation process and setting parameter values, and analyzing the results. I took more responsibility for the implementation of preprocessing images, content loss, and postprocessing images for color mapping.
+
+I took more responsibility for the implementation of style representation (Gram) and style loss.
 
 %------------------------------------------------------------------------
 \section{References}
@@ -174,6 +180,8 @@ individual contribution
 
 [7] Y. Jia, E. Shelhamer, J. Donahue, S. Karayev, J. Long, R. Girshick, S. Guadarrama, and T. Darrell. Caffe: Convolutional
 architecture for fast feature embedding. In Proceedings of the ACM International Conference on Multimedia, pages 675-678. ACM, 2014.
+
+[8] https://github.com/jcjohnson/neural-style
 
 {\small
 \bibliographystyle{ieee}
