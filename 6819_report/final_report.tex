@@ -86,6 +86,26 @@ We can add a feature space that obtains texture information to the network. If t
 
 Then the single convolutional neural network can generate both content representation (from higher levels of the original network) and style representation (across all levels of the supplemented network). This algorithm for neural image transfer thus highlights the ability to separate image contents and image styles into content representation and style representation. 
 
+\begin{figure*}
+\begin{center}
+\includegraphics[width=0.3\linewidth]{painted_bridge/out_100.png}
+\includegraphics[width=0.3\linewidth]{painted_bridge/out_500.png}
+\includegraphics[width=0.3\linewidth]{painted_bridge/out.png}
+\end{center}
+   \caption{Generated images after 100, 500 and 1000 iterations}
+\label{fig:short}
+\end{figure*}
+
+\begin{figure*}
+\begin{center}
+\includegraphics[width=0.3\linewidth]{painted_bridge_oc/out_100.png}
+\includegraphics[width=0.3\linewidth]{painted_bridge_oc/out_500.png}
+\includegraphics[width=0.3\linewidth]{painted_bridge_oc/out.png}
+\end{center}
+   \caption{Generated images after 100, 500 and 1000 iterations, preserving the color of the original image}
+\label{fig:short}
+\end{figure*}
+
 %------------------------------------------------------------------------
 \section{Image Style Transfer Using Neural Networks}
 
@@ -149,24 +169,17 @@ The algorithm for neural image transfer produces an image that takes its color f
 %------------------------------------------------------------------------
 \section{Results}
 
-For testing our implementation we used the following photograph of the Brooklyn Bridge and painting of a nighttime scene: \\
+For testing our implementation we used the following photograph of the Brooklyn Bridge [9] and painting of a nighttime scene [10]: \\
 \begin{center}
 \includegraphics[width=0.8\linewidth]{content1.jpg}
 \includegraphics[width=0.8\linewidth]{style1.jpeg}
 \end{center}
 
-After running 
+After trying different $\alpha$ and $\beta$ values, we chose to set $\alpha = 5$ and $\beta = 100$, as in [8], as it gave us relatively aesthetically pleasing results. When running the code without color mapping, we generated the images in figure 1. When running the code with color mapping, we generated the images in figure 2.
 
-\begin{figure*}
 \begin{center}
-\includegraphics[width=0.3\linewidth]{painted_bridge/out_100.png}
-\includegraphics[width=0.3\linewidth]{painted_bridge/out_500.png}
-\includegraphics[width=0.3\linewidth]{painted_bridge/out.png}
+\includegraphics[width=0.8\linewidth]{brooklyn_night/out.png}
 \end{center}
-   \caption{Generated images after 100, 500 and 1000 iterations}
-\label{fig:short}
-\end{figure*}
-
 
 %------------------------------------------------------------------------
 \section{Conclusion}
@@ -199,6 +212,10 @@ I took more responsibility for the implementation of style representation (Gram)
 architecture for fast feature embedding. In Proceedings of the ACM International Conference on Multimedia, pages 675-678. ACM, 2014.
 
 [8] https://github.com/jcjohnson/neural-style
+
+[9] https://afremov.com/image.php?type=P&id=19095
+
+[10] http://images.mentalfloss.com/sites/default/files/styles/insert_main_wide_image/public/iStock_000026542107_Small.jpg
 
 {\small
 \bibliographystyle{ieee}
