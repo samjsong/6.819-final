@@ -28,7 +28,7 @@
 \title{Neural Image Style Transfer}
 
 \author{Veronica Lee\\
-MIT\\
+Massachusetts Institute of Technology\\
 Cambridge, MA, USA\\
 {\tt\small vslee@mit.edu}
 % For a paper whose authors are all at the same institution,
@@ -38,7 +38,7 @@ Cambridge, MA, USA\\
 % To save space, use either the email address or home page, not both
 \and
 Samuel Song\\
-MIT\\
+Massachusetts Institute of Technology\\
 Cambridge, MA, USA\\
 {\tt\small samjsong@mit.edu}
 }
@@ -48,42 +48,48 @@ Cambridge, MA, USA\\
 
 %%%%%%%%% ABSTRACT
 \begin{abstract}
-   The ABSTRACT is to be in fully-justified italicized text, at the top
-   of the left-hand column, below the author and affiliation
-   information. Use the word ``Abstract'' as the title, in 12-point
-   Times, boldface type, centered relative to the column, initially
-   capitalized. The abstract is to be in 10-point, single-spaced type.
-   Leave two blank lines after the Abstract, then begin the main text.
-   Look at previous CVPR abstracts to get a feel for style and length.
+A pastiche is a work of art that imitates the style of other works of art. The computer vision and machine learning technologies that exist today allow pastiches to be created digitally. This automated process of recomposing an image to consist of styles from other images is called an image style transfer. In this paper, we discuss the reimplementation of image style transfer using a deep convolutional neural network, following the process outlined by Leon A. Gatys, Alexander S. Ecker, and Matthias Bethge [1]. We also discuss color mapping techniques which preserve the color of the content image.
 \end{abstract}
 
 %%%%%%%%% BODY TEXT
 \section{Introduction}
 
-A pastiche is a work of art that imitates the style of other works of art. The computer vision and machine learning technologies that exist today allow pastiches to be created digitally. Specifically, this automated process of recomposing an image to consist of styles from other images is called an image style transfer. In this paper, we will discuss the implementation of image style transfer using a deep neural network. 
+A pastiche is a work of art that imitates the style of other works of art. The computer vision and machine learning technologies that exist today allow pastiches to be created digitally. Specifically, this automated process of recomposing an image (content image) to consist of styles from other images (style images) is called an image style transfer. 
+
+Image style transfers are currently being used on mobile and web applications. These interfaces allow users to render any photograph with the style of a painting of their choice.
+
+In this paper, we will discuss the implementation of image style transfer using a deep neural network, following the process outlined by Leon A. Gatys, Alexander S. Ecker, and Matthias Bethge [1]. In particular, we will use a convolutional neural network (CNN), which is a type of deep neural network favored for image processing tasks. 
+
+The algorithm for neural image transfer produces an image that takes its color from the style image. We will also discuss color mapping techniques which preserve the color of the content image.
 
 %------------------------------------------------------------------------
 \section{Related Work}
 
+While we are reimplementing the algorithm for neural image transfer in this paper, there have been many other works regarding image style transfer. 
 
+Using neural networks to perform an image style transfer as in [1] is very recent breakthrough. Computing using neural networks, however, are computationally expensive. Optimizations have been performed [3, 4] to speed up the process. One improvement has been to frame the transfer from the style image to the content image as an image transformation problem and solve it by training a feed-forward, convolutional neural network. 
+
+Following these time optimizations, there has recently been an implementation for video style transfer, which transfers the style of a painting to an entire video sequence, by Manuel Ruder et al [5]. In order to extend image style transfer to videos, they used new initializations and loss functions that improved frame-to-frame stability. 
+
+There are approaches to implementing image style transfers that do not use deep convolutional neural networks. One example is the patch-based style transfer, which transfers the style by applying a patch in the style image that matches a patch in the content image. A disadvantage of this approach, however, is that the algorithm fails to transfer edge styles. 
+
+%Another example is texture synthesis. 
 
 %------------------------------------------------------------------------
-\section{Image Content and Style}
+\section{Definitions}
 
-approach setup and definitions
+Generating image contents and image styles is defined as follows [1]:
 
-\subsection{Content Representation and Reconstruction}
+Convolutional neural networks consist of layers of image filters, and the output of each layer is a feature map. The feature maps of the lower levels in the network will consist of exact pixel values from the original content image, while features from the higher levels will contain higher-level content information. Thus, we define content representation to be the outputs of the higher layers in the network.
 
-content representation
+We can add a feature space that obtains texture information to the network. If this feature space is built on top of the outputs of each level in the network, then we can acquire a correlation between the filter responses and the spatial extent of the feature maps. Thus, we define style representation to be the outputs of multiple layers in the supplemented network. 
 
-\subsection{Style Representation and Reconstruction}
-
-style representation
+Then the single convolutional neural network can generate both content representation (from higher levels of the original network) and style representation (across all levels of the supplemented network). This algorithm for neural image transfer thus highlights the ability to separate image contents and image styles into content representation and style representation. 
 
 %------------------------------------------------------------------------
 \section{Image Style Transfer Using Neural Networks}
 
-approach methods and implementation
+We followed the same methodology as outlined in [1]. In particular, we used the same 19-layer VGG network with 16 convolutional layers and 5 pooling layers, as given in [6], and normalized the VGG network by scaling weights. The model was publicly available in caffe [7]. We also used average pooling instead of maximum pooling, as suggested in [1]. 
 
 \subsection{Methodology}
 
@@ -92,17 +98,39 @@ approach methods and implementation
 %------------------------------------------------------------------------
 \section{Results}
 
-results
+After running 
 
 %------------------------------------------------------------------------
 \section{Conclusion}
 
 conclusion
 
+%------------------------------------------------------------------------
+\section{Individual Contribution}
+
+individual contribution
+
+%------------------------------------------------------------------------
+\section{References}
+
+[1] Leon A. Gatys, Alexander S. Ecker, and Matthias Bethge. A Neural Algorithm of Artistic Style. In: CoRR abs/1508.06576 (2015). url: http://arxiv.org/abs/1508.06576.
+
+[2] Leon A. Gatys et al. Preserving Color in Neural Artistic Style Transfer. In: CoRR abs/1606.05897 (2016). url: http://arxiv.org/abs/1606.05897.
+
+[3] Ulyanov, Dmitry, Vadim Lebedev, Andrea Vedaldi, and Victor Lempitsky. Texture Networks: Feed-forward Synthesis of Textures and Stylized Images (2016).
+
+[4] Johnson, Justin, Alexandre Alahi, and Li Fei-Fei. Perceptual Losses for Real-Time Style Transfer and Super-Resolution (2016).
+
+[5] Manuel Ruder, Alexey Dosovitskiy, Thomas Brox. Artistic Style Transfer for Videos (2016). url: https://arxiv.org/abs/1604.08610
+
+[6] K. Simonyan and A. Zisserman. Very Deep Convolutional Networks for Large-Scale Image Recognition. arXiv:1409.1556 [cs], Sept. 2014. arXiv: 1409.1556.
+
+[7] Y. Jia, E. Shelhamer, J. Donahue, S. Karayev, J. Long, R. Girshick, S. Guadarrama, and T. Darrell. Caffe: Convolutional
+architecture for fast feature embedding. In Proceedings of the ACM International Conference on Multimedia, pages 675-678. ACM, 2014.
 
 {\small
 \bibliographystyle{ieee}
-\bibliography{egbib}
+\bibliography{finalbib}
 }
 
 \end{document}
