@@ -184,14 +184,16 @@ After trying different $\alpha$ and $\beta$ values, we chose to set $\alpha = 5$
 %------------------------------------------------------------------------
 \section{Conclusion}
 
-conclusion
+The reimplementation of the algorithms and process described in [1] was an interesting learning experience that gives us insight into the relatively new idea of image style transfer. We implemented the algorithm to generate images that combined the content of a photograph and the style of an artwork, and a simple method of postprocessing the generated images to preserve the colors of the content image while maintaining the texture of the style image.
+
+With more time, our team would have tried different approaches to color mapping as discussed in [2] to achieve better results. We also realize that this algorithm can be computationally expensive and therefore potentially slow. A potential next step would have been to look into optimizations in the algorithm. There are also other approaches to image style transfer that do not involve neural nets, and we could look into implementing the different methods. Another interesting potential next step would be looking into image style transfers for video, as discussed in [5].
 
 %------------------------------------------------------------------------
 \section{Individual Contribution}
 
 vlee: I collaborated with the other team member to understand the algorithm for neural image transfer, make high-level decisions concerning the algorithm implementation process, set parameter values, and analyze the results. I took more responsibility for the implementation of preprocessing images, content loss, and postprocessing images for color mapping.
 
-ssong: I collaborated with the other team member to understand the algorithm for neural image transfer, make high-level decisions concerning the algorithm implementation process, set parameter values, and analyze the results. I took more responsibility for the implementation of style representation (Gram) and style loss.
+ssong: I collaborated with the other team member to understand the algorithm for neural image transfer, make high-level decisions concerning the algorithm implementation process, set parameter values, and analyze the results. I took more responsibility for the implementation of style representation (Gram matrices), and style loss.
 
 %------------------------------------------------------------------------
 \section{References}
@@ -213,9 +215,12 @@ architecture for fast feature embedding. In Proceedings of the ACM International
 
 [8] https://github.com/jcjohnson/neural-style
 
-%[9] https://afremov.com/image.php?type=P&id=19095
+% https://afremov.com/image.php?type=P&id=19095
+[9] https://afremov.com/image.php?type=P\&id=19095
 
-%[10] http://images.mentalfloss.com/sites/default/files/styles/insert_main_wide_image/public/iStock_000026542107_Small.jpg
+% http://images.mentalfloss.com/sites/default/files/styles/insert_main_wide_image/public/iStock_000026542107_Small.jpg
+[10] http://images.mentalfloss.com/sites/default/files/styles/
+insert\_main\_wide\_image/public/iStock\_000026542107\_Small.jpg
 
 {\small
 \bibliographystyle{ieee}
